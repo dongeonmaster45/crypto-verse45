@@ -160,6 +160,7 @@ const Coin = () => {
           <div className="about">
             <h3>About</h3>
             <p
+              style={{ textAlign: "justify" }}
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
                   coin.description ? coin.description.en : ""

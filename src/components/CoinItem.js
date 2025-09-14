@@ -1,21 +1,36 @@
 import React from "react";
 import "./Coins.css";
+import { Link } from "react-router-dom";
 
-const CoinItem = (props) => {
+const CoinItem = ({ coin }) => {
   return (
-    <div className="coin-row">
-      <p>{props.coins.market_cap_rank}</p>
-      <div className="img-symbol">
-        <img src={props.coins.image} alt="" />
-        <p>{props.coins.symbol.toUpperCase()}</p>
-      </div>
-      <p>${props.coins.current_price.toLocaleString()}</p>
-      <p>{props.coins.price_change_percentage_24h.toFixed(2)}%</p>
-      <p className="hide-mobile">
-        ${props.coins.total_volume.toLocaleString()}
-      </p>
-      <p className="hide-mobile">${props.coins.market_cap.toLocaleString()}</p>
-    </div>
+    <>
+      <td>{coin.market_cap_rank}</td>
+      <td>
+        <Link to={`/coin/${coin.id}`} className="img-symbol">
+          <img src={coin.image} alt={coin.name} />
+          <span>{coin.symbol.toUpperCase()}</span>
+        </Link>
+      </td>
+      <td>
+        <Link className="link" to={`/coin/${coin.id}`}>
+          ${coin.current_price.toLocaleString()}
+        </Link>
+      </td>
+      <td>
+        <Link className="link" to={`/coin/${coin.id}`}>
+          {coin?.price_change_percentage_24h?.toFixed(2) || 0.0}%
+        </Link>
+      </td>
+      <td className="hide-mobile">
+        <Link className="link" to={`/coin/${coin.id}`}>
+          ${coin.total_volume.toLocaleString()}
+        </Link>
+      </td>
+      <td className="hide-mobile">
+        <Link className="link" to={`/coin/${coin.id}`}>${coin.market_cap.toLocaleString()}</Link>
+      </td>
+    </>
   );
 };
 
